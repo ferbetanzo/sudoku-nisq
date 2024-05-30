@@ -39,7 +39,7 @@ def find_open_tuples(sudoku):
                    open_tuple.append((i, j, digit))
    return open_tuple
 
-## Find tuples that have unique assignments
+## Find open tuples that have unique assignments
 def fix_tuples(open_tuples):
     # Create dictionary to count occurrences of each cell position with potential digits
     count_dict = {}
