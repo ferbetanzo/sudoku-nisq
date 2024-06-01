@@ -1,35 +1,13 @@
 import matplotlib.pyplot as plt
-import csv
 
 
 class Preprocessing:
-    def __init__(self, sudoku_path:str) -> None:
-        self.sudoku_size: int
-        self.set_tuples: dict[tuple: set] = self.csv_to_set_tuples(sudoku_path)
+    def __init__(self) -> None:
         self.rows_constrictions: dict[tuple: set] = {}
         self.columns_constrictions: dict[tuple: set] = {}
         self.subunit_constrictions: dict[tuple: set] = {}
         self.open_tuples: dict[tuple: set] = {}
         
-
-    def csv_to_set_tuples(self, filename:str) -> dict[tuple: int]:
-        """Create a dictionary containing the preset values of the sudoku and initialize
-        the sudoku size"""
-
-        set_tuples = {}
-        with open(filename, newline='') as file:
-            reader = csv.reader(file)
-            counter = 0
-            for i, row in enumerate(reader):
-                counter += 1
-                for j, value in enumerate(row):
-                    if value != "0":
-                        set_tuples[(i, j)] = {int(value)}
-            
-        self.sudoku_size = counter
-
-        return set_tuples
-    
     
     def update_constrictions(self, fixed_tuples: dict[tuple : int]) -> None:
         """Update the row, column and subunit constrictions for each cell given the 
