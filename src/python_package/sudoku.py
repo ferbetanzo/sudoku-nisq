@@ -29,7 +29,7 @@ class Sudoku(Preprocessing):
         return set_tuples
     
     
-    def plot_grid(self) -> Figure:
+    def plot_grid(self, title=None) -> Figure:
         """ Plot the sudoku grid with the current set values"""
 
         fig, ax = plt.subplots(figsize=(6, 6))
@@ -55,6 +55,9 @@ class Sudoku(Preprocessing):
         for (i, j), value in self.set_tuples.items():
             ax.text(j + 0.5, self.sudoku_size -0.5 - i, str(next(iter(value))),
                     ha='center', va='center', fontsize=100/self.sudoku_size)
+            
+        if title:
+            plt.title(title, fontsize=20)
         
         plt.close(fig)
 
