@@ -20,6 +20,12 @@ flake8-pyproject = "^1.2.3"
 pre-commit = "3.3.1"
 pylint = "2.17.4"
 pytest = "^8.2.2"
+numpy = "1.23.0"
+qiskit = "0.46.2"
+qiskit-ibmq-provider = "^0.20.2"
+jupyter = "^1.0.0"
+qiskit-aer = "^0.14.2"
+matplotlib = "^3.9.0"
 
 [tool.black]
 line-length = 120
