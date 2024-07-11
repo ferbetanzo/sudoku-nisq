@@ -51,7 +51,7 @@ pylatexenc==2.10
 pyparsing==3.1.2
 pyspnego==0.10.2
 python-dateutil==2.9.0.post0
--e git+ssh://git@github.com/ReyGuadarrama/sudoku-nisq.git@d02e1143989f238db60f2469ad84dcce182b322e#egg=python_package
+-e git+ssh://git@github.com/ReyGuadarrama/sudoku-nisq.git@fcb500762f28a4bf54e1f820bf3a878bd6fc0584#egg=python_package
 pytket==1.28.0
 pytket-qiskit==0.53.0
 pyzmq==26.0.3
