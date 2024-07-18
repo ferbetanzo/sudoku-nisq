@@ -6,7 +6,6 @@ class Preprocessing:
         self.columns_constraints: dict[tuple: set] = {}
         self.subunit_constraints: dict[tuple: set] = {}
         self.open_tuples: dict[tuple: set] = {}
-        
     
     def update_constraints(self) -> None:
         """Update the row, column and subunit constraints for each cell given the 
@@ -76,6 +75,6 @@ class Preprocessing:
 
         # Step 2: constraints update
         self.update_constraints()
-        
-
-    
+ 
+    def convert_to_simple_open_tuples(self) -> None:
+        self.simple_open_tuples = [(key[0], key[1], value) for key, values in self.open_tuples.items() for value in values]

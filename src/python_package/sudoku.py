@@ -62,6 +62,9 @@ class Sudoku(Preprocessing):
         plt.close(fig)
 
         return fig
+
+    def convert_to_simple_set_tuples(self) -> None:
+        self.simple_set_tuples = [(key[0], key[1], value) for key, values in self.set_tuples.items() for value in values]
     
 # Thesis author's implementation to represent a sudoku board
 
