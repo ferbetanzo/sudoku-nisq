@@ -135,29 +135,34 @@ class Exact_Cover_QCirc:
         self.build_diffuser()
         
         if num_iterations is None:
-            num_iterations = math.floor((math.pi / 4) * math.sqrt((2 ** self.s_size) / self.num_solutions))
-        
+            a = math.sqrt((2 ** self.s_size) / self.num_solutions)
+            num_iterations = math.floor((math.pi / 4) * a)
+            
         # Append sub-circuits to the main circuit
         for i in range(num_iterations):
             self.main_circuit.append(self.aux_circ)
-
-        self.main_circuit.append(self.diffuser)
+            self.main_circuit.append(self.diffuser)
 
         c_bits = self.main_circuit.add_c_register("c", self.s_size)
         for q in self.s_qubits:
             self.main_circuit.Measure(q, c_bits[q.index[0]])
 
-    def find_resources(self):
+    def find_resources(self, num_iterations = None):
+        if num_iterations is None:
+            a = math.sqrt((2 ** self.s_size) / self.num_solutions)
+            num_iterations = math.floor((math.pi / 4) * a)
         num_qubits = self.s_size + self.u_size * self.b + 1
         superpos_gates = self.s_size
-        anc_gates = 2
+        prepare_anc_gates = 2
         counter_gates = 0
         for s in self.subsets:
             counter_gates += len(self.subsets[s]) * self.b
         oracle_gates = 1 + 2*((self.u_size - 1)*self.b)
         diffuser_gates = 1 + 4*self.s_size
-        total_gates = superpos_gates + anc_gates + 2*counter_gates + oracle_gates + diffuser_gates
-        return num_qubits, total_gates
+        MCX_gates = num_iterations*(oracle_gates+2*counter_gates)
+        total_gates = superpos_gates + prepare_anc_gates + MCX_gates + num_iterations*diffuser_gates
+        
+        return num_qubits, total_gates, MCX_gates
 
     def get_circuit(self):
         # Returns the fully assembled circuit
